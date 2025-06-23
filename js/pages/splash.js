@@ -65,7 +65,7 @@ let dataArray;
 let bufferLength;
 let audioPlaying = false;
 
-const audioURL = '/assets/audio/muscle_car_power_up.wav';
+const audioURL = 'assets/audio/muscle_car_power_up.wav';
 
 // Animation frame id for canceling animation loop
 let animationFrameId;
