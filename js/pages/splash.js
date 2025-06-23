@@ -65,7 +65,10 @@ let dataArray;
 let bufferLength;
 let audioPlaying = false;
 
-const audioURL = '../../assets/audio/muscle_car_power_up.wav'
+//const audioURL = '../../assets/audio/muscle_car_power_up.wav'
+const audioURL = "";
+
+ 
 
 // Animation frame id for canceling animation loop
 let animationFrameId;
@@ -97,41 +100,57 @@ async function setupAudio() {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   }
 
-  try {
-    const response = await fetch(audioURL);
-    const arrayBuffer = await response.arrayBuffer();
-    const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+  const candidates = [
+    '../../assets/audio/muscle_car_power_up.wav',
+    '/NTH_mk2/assets/audio/muscle_car_power_up.wav',
+    '/assets/audio/muscle_car_power_up.wav'
+  ];
 
-    sourceNode = audioCtx.createBufferSource();
-    sourceNode.buffer = audioBuffer;
+  let audioBuffer = null;
+  let workingPath = null;
 
-    analyser = audioCtx.createAnalyser();
-    analyser.fftSize = 256;
-    bufferLength = analyser.frequencyBinCount;
-    dataArray = new Uint8Array(bufferLength);
+  for (const path of candidates) {
+    try {
+      const response = await fetch(path);
+      if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
 
-    sourceNode.connect(analyser);
-    analyser.connect(audioCtx.destination);
+      const arrayBuffer = await response.arrayBuffer();
+      audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
 
-    sourceNode.onended = () => {
-      audioPlaying = false;
-      console.log("Audio ended.");
-
-      // Start glow-based transition
-      transitioningToCarousel = true;
-      glowExpansionStartTime = performance.now();
-    };
-  } catch (err) {
-    console.error('Error setting up audio:', err);
+      workingPath = path;
+      console.log(`✅ Loaded audio from: ${workingPath}`);
+      break;
+    } catch (err) {
+      console.warn(`⚠️ Failed to load ${path}: ${err.message}`);
+    }
   }
+
+  if (!audioBuffer) {
+    console.error("❌ Failed to load any audio path.");
+    return;
+  }
+
+  sourceNode = audioCtx.createBufferSource();
+  sourceNode.buffer = audioBuffer;
+
+  analyser = audioCtx.createAnalyser();
+  analyser.fftSize = 256;
+  bufferLength = analyser.frequencyBinCount;
+  dataArray = new Uint8Array(bufferLength);
+
+  sourceNode.connect(analyser);
+  analyser.connect(audioCtx.destination);
+
+  sourceNode.onended = () => {
+    audioPlaying = false;
+    console.log("Audio ended.");
+
+    // Start glow-based transition
+    transitioningToCarousel = true;
+    glowExpansionStartTime = performance.now();
+  };
 }
 
-// Function to reset sphere angles to initial values
-function resetSpheres() {
-  spheres.forEach(sphere => {
-    sphere.angle = 0;
-  });
-}
 
 // Color cycling & opacity pulse angles
 let colorCycleAngle = 0;
