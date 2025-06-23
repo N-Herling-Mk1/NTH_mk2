@@ -1,0 +1,247 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background: black;
+  font-family: sans-serif;
+}
+
+/* Carousel container wrapper */
+.carousel-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90vw;
+  max-width: 1200px;
+  margin: 50px auto;
+  user-select: none;
+  gap: 30px;
+}
+
+/* Carousel visible area */
+.carousel-container {
+  padding: 10px 0 10px 0; /* top padding 200px, bottom 70px */
+  overflow: visible;
+  width: 100%;
+  height: 260px;
+  outline: none;
+  background-color: black;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+/* Carousel track (flex row of tiles) */
+.carousel {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.carousel-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;               /* space between buttons */
+  padding: 8px 20px;       /* space inside the border */
+  border: 2px solid limegreen;  /* thin green border */
+  border-radius: 30px;          /* big rounded corners */
+  background: rgba(0, 50, 0, 0.2); /* subtle dark translucent bg (optional) */
+  width: fit-content;           /* shrink container to fit content */
+  margin: 5px auto 0 auto;     /* center horizontally & add top margin */
+}
+
+/* Each tile */
+.page-link {
+  flex: 0 0 calc((100% - 20px) / 3);
+  margin: 10px 5px;
+  height: 90%;
+  background-color: forestgreen;
+  opacity: 0.6;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: normal;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  box-sizing: border-box;
+  color: white;
+  transform: scale(0.675);
+  transition:
+    transform 0.5s ease-in-out 0.08s,
+    opacity 0.4s ease-in-out,
+    background-color 0.3s ease,
+    font-weight 0.3s ease;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+/* Large label inside tile */
+.page-link .large-label {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: inherit;
+  margin-bottom: 0.2em;
+}
+
+/* Small label inside tile */
+.page-link .small-label {
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Highlighted center tile */
+.page-link.center {
+  transform: scale(0.95);
+  opacity: 1;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 0 12px 4px rgba(0, 255, 0, 0.5),
+    0 0 24px 8px rgba(0, 255, 0, 0.35),
+    0 0 40px 12px rgba(0, 255, 0, 0.25),
+    0 0 60px 18px rgba(0, 255, 0, 0.15);
+  animation: pulse-continuous 2s ease-in-out infinite;
+}
+
+/* Stop pulse on hover */
+.page-link.center:hover {
+  animation-play-state: paused;
+  transform: scale(1);
+}
+
+/* Scroll buttons */
+.carousel-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  overflow: visible;
+  border-radius: 0;
+  width: 60px;
+  height: 100px;
+  clip-path: polygon(20% 0%, 80% 0%, 100% 50%, 80% 100%, 20% 100%, 0% 50%);
+  background: rgba(0, 255, 0, 0.15);
+}
+
+/* Left-pointing triangle */
+.carousel-toggle.left {
+  border-top: 50px solid transparent;
+  border-bottom: 50px solid transparent;
+  border-right: 80px solid green;
+}
+
+/* Right-pointing triangle */
+.carousel-toggle.right {
+  border-top: 50px solid transparent;
+  border-bottom: 50px solid transparent;
+  border-left: 80px solid green;
+}
+
+/* Hover effect: lighter green */
+.carousel-toggle.left:hover {
+  border-right-color: #66bb6a;
+}
+
+.carousel-toggle.right:hover {
+  border-left-color: #66bb6a;
+}
+
+/* --- ELECTRICITY HAZE & LIGHTNING BRANCHES --- */
+
+/* Electric haze halo around button - tight circular glow with ::before */
+.carousel-toggle.electric-haze::after {
+  content: "";
+  position: absolute;
+  bottom: -150px;   /* Push below the triangle tip */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 100px;
+  background: rgba(0, 255, 255, 0.85);
+  box-shadow: 0 0 18px 8px rgba(0, 255, 255, 0.6);
+  border-radius: 2px;
+  animation: sparkBurst 0.75s ease-out forwards;
+  pointer-events: none;
+  z-index: 9;
+}
+
+
+@keyframes sparkBurst {
+  0% {
+    transform: translate(-50%, -100%) scaleY(0.1) rotate(0deg);
+    opacity: 0;
+  }
+  40% {
+    transform: translate(-50%, -100%) scaleY(1) rotate(15deg);
+    opacity: 1;
+  }
+  70% {
+    transform: translate(-50%, -100%) scaleY(0.8) rotate(-10deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(-50%, -100%) scaleY(0.1) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+
+/* Base lightning arc setup */
+.carousel-toggle .lightning-branch {
+  position: absolute;
+  width: 8px;
+  height: 40px;
+  background: linear-gradient(180deg, #00f0ff 0%, transparent 100%);
+  filter: drop-shadow(0 0 6px #00e0ff);
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 11;
+  opacity: 0.7;
+}
+
+/* Arc anchoring for left triangle tip */
+.carousel-toggle.left .lightning-branch {
+  top: 50%;
+  left: -40px;
+  transform-origin: right center;
+  transform: rotate(0deg);
+}
+
+
+
+/* Pulse animation for center tile */
+@keyframes pulse-continuous {
+  0%, 100% {
+    transform: scale(0.95);
+  }
+  50% {
+    transform: scale(1);
+  }
+}
+
+
+.tile-image {
+  width: 75%;
+  height: auto;
+  max-height: 60%;
+  object-fit: cover; /* Ensures image fills area while cropping */
+  border-radius: 12px; /* Adjust for how round you want the corners */
+  margin-bottom: 10px;
+  display: block;
+}

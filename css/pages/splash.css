@@ -1,0 +1,104 @@
+/* 
+splash.css 
+.
+.CSS for the splash
+*/
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background-color: #111;
+  color: white;
+}
+
+/* Main wrapper for positioning */
+.splash-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Center canvas */
+#sphereCanvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120vw;   /* increased from 60vw */
+  height: 120vh;  /* increased from 60vh */
+}
+
+
+/* Button: close to canvas center and default styling */
+#enterBtn {
+  position: absolute;
+  top: calc(50% + 15vh);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: rgba(0, 255, 170, 0.8);
+  color: black;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 200px; /* or a value that fits the widest text */
+  height: 60px;
+  text-align: center;
+}
+
+/* On hover, change button text */
+#enterBtn:hover {
+  background-color: rgba(0, 255, 170, 1);
+  color: black;
+}
+
+/* Electric haze pulse effect */
+.carousel-toggle.electric-haze::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px 3px rgba(0, 255, 255, 0.3);
+  animation: hazePulse 1.25s ease-out forwards;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes hazePulse {
+  0% {
+    box-shadow: 0 0 0px 0px rgba(255, 255, 255, 0);
+  }
+  25% {
+    box-shadow: 0 0 100px 60px rgba(0, 255, 255, 0.85);
+  }
+  50% {
+    box-shadow: 0 0 200px 1000px rgba(255, 255, 255, 1);
+  }
+  75% {
+    box-shadow: 0 0 80px 40px rgba(0, 255, 255, 0.6);
+  }
+  90% {
+    box-shadow: 0 0 0px 0px rgba(0, 255, 255, 0);
+  }
+  95% {
+    box-shadow: 0 0 60px 30px rgba(255, 255, 255, 0.9);
+  }
+  98% {
+    box-shadow: 0 0 20px 10px rgba(0, 255, 255, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 0px 0px rgba(255, 255, 255, 0);
+  }
+}
+
+
+
+
+
