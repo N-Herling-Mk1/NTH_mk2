@@ -3,21 +3,16 @@ let animationPlaying = false;
 let clickBlocked = false;  // Master click blocker ...
 let _MASTER_BLOCK_TIME = 1900;
 
+const toggleSound = document.getElementById("toggleSound");
+const tileSound = document.getElementById("tileSound");
+
 document.addEventListener("DOMContentLoaded", () => {
     const carousel = document.querySelector(".carousel");
     const originalTiles = Array.from(document.querySelectorAll(".page-link"));
     const leftBtn = document.querySelector(".carousel-toggle.left");
     const rightBtn = document.querySelector(".carousel-toggle.right");
 
-    // ✳️ Added: preload audio element reference
-    const clickSound = document.getElementById("clickSound");
-    // ✳️ End added
-
-    if (clickSound) {
-        clickSound.addEventListener("ended", () => {
-            audioPlaying = false;
-        });
-    }
+    // Removed old clickSound listener since we replaced it with toggleSound and tileSound
 
     const total = originalTiles.length;
     if (total < 3) {
@@ -30,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
         parseInt(tileStyle.marginLeft) +
         parseInt(tileStyle.marginRight);
 
-    let centerIndex = 0;
+    let centerIndex = 1;
     const windowSize = 3;
     const windowTiles = [];
 
@@ -53,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             tile.dataset.large = original.dataset.large;
             tile.dataset.small = original.dataset.small;
+            tile.dataset.page = original.dataset.page; // <-- Make sure page link is copied here
 
             tile.innerHTML = `
   ${original.dataset.img ? `<img src="${original.dataset.img}" alt="${original.dataset.large || ''}" class="tile-image">` : ''}
@@ -60,10 +56,36 @@ document.addEventListener("DOMContentLoaded", () => {
   <div class="small-label">${original.dataset.small || ""}</div>
 `;
 
-
             tile.onclick = () => {
                 console.log(`Clicked tile: large="${tile.dataset.large}", small="${tile.dataset.small}"`);
+
+                if (tileSound) {
+                    tileSound.pause();
+                    tileSound.currentTime = 0;
+                    tileSound.play().then(() => {
+                        // Navigate after sound finishes playing
+                        tileSound.onended = () => {
+                            const page = tile.dataset.page;
+                            if (page) {
+                                window.location.href = page;
+                            }
+                        };
+                    }).catch(err => {
+                        // In case playback fails (autoplay restrictions etc.), fallback to immediate navigation
+                        const page = tile.dataset.page;
+                        if (page) {
+                            window.location.href = page;
+                        }
+                    });
+                } else {
+                    // If tileSound doesn't exist, just navigate immediately
+                    const page = tile.dataset.page;
+                    if (page) {
+                        window.location.href = page;
+                    }
+                }
             };
+
 
             tile.onmouseenter = () => {
                 console.log(`Hover start on tile: index=${idx}`);
@@ -125,7 +147,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     centerTile.classList.add("pulse-animation");
                     animationPlaying = false;
 
-
                 }, 75);
 
                 isAnimating = false;
@@ -155,10 +176,10 @@ document.addEventListener("DOMContentLoaded", () => {
         addElectricEffect(leftBtn);
         scroll("left");
 
-        if (clickSound) {
-            clickSound.pause();
-            clickSound.currentTime = 0;
-            clickSound.play();
+        if (toggleSound) {
+            toggleSound.pause();
+            toggleSound.currentTime = 0;
+            toggleSound.play();
         }
 
     });
@@ -172,17 +193,14 @@ document.addEventListener("DOMContentLoaded", () => {
             clickBlocked = false; // unblock after 1.5s (or whatever you want)
         }, _MASTER_BLOCK_TIME);
 
-        //createSparks(rightBtn);
         addElectricEffect(rightBtn);
         scroll("right");
 
-        // ✳️ Added: play click sound on right button
-        if (clickSound) {
-            clickSound.currentTime = 0;
-            clickSound.play();
+        if (toggleSound) {
+            toggleSound.pause();
+            toggleSound.currentTime = 0;
+            toggleSound.play();
         }
-        // ✳️ End added
 
     });
 });
-

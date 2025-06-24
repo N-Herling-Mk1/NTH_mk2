@@ -2,24 +2,32 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Page 1</title>
-    <link rel="stylesheet" href="../css/pages/landing.css" />
-    <link rel="icon" href="../assets/images/page_ico_w_bg.png" type="image/png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Page 1</title>
+  <link rel="stylesheet" href="../css/pages/page1.css" />
+  <link rel="icon" href="../assets/images/page_ico_w_bg.png" type="image/png" />
 </head>
 
 <body>
-    <h1>Welcome to Page 1</h1>
-    <button id="backBtn">Back to Carousel</button>
+  <div id="dashboard-placeholder"></div>
 
-    <script>
-        document.getElementById('backBtn').addEventListener('click', () => {
-            window.location.href = 'carousel.html';
-        });
+  <h1 style="text-align:center;">Welcome to Page 1</h1>
 
-        console.log('Page 1 loaded');
-    </script>
+  <div id="cv-content" tabindex="0">
+    <!-- Embed PDF via iframe inside the scrollable div -->
+    <iframe
+      src="../assets/docs/NHerling_CV.pdf"
+      title="My CV PDF Viewer"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <script src="../js/pages/dashboard.js" defer></script>
+
+  <script>
+    console.log('Page 1 loaded');
+  </script>
 </body>
 
 </html>

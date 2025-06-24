@@ -368,7 +368,7 @@ enterBtn.addEventListener('mouseenter', () => {
     if (!enterBtn.dataset.originalText) {
       enterBtn.dataset.originalText = enterBtn.textContent;
     }
-    enterBtn.textContent = '<press enter>';
+    enterBtn.textContent = '<click to enter>';
   }
 });
 
