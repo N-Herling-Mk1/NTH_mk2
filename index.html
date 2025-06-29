@@ -2,40 +2,42 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AI UI Splash Page</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI UI Splash Page</title>
 
-    <!-- 🌐 Open Graph (Facebook, LinkedIn, etc.) -->
-    <meta property="og:title" content="AI UI Splash Page" />
-    <meta property="og:description" content="Explore an interactive AI-powered UI carousel." />
-    <!-- Corrected og:image URL -->
-    <meta property="og:image" content="https://n-herling-mk1.github.io/NTH_mk2/assets/images/NTH_resized_ico.png" />
-    <meta property="og:url" content="https://n-herling-mk1.github.io/NTH_mk2/" />
-    <meta property="og:type" content="website" />
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="AI UI Splash Page" />
+  <meta property="og:description" content="Explore an interactive AI-powered UI carousel." />
+  <meta property="og:image" content="https://n-herling-mk1.github.io/NTH_mk2/assets/images/NTH_resized_ico.png" />
+  <meta property="og:url" content="https://n-herling-mk1.github.io/NTH_mk2/" />
+  <meta property="og:type" content="website" />
 
-    <!-- 🐦 Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="AI UI Splash Page" />
-    <meta name="twitter:description" content="Explore an interactive AI-powered UI carousel." />
-    <!-- Corrected twitter:image URL -->
-    <meta name="twitter:image" content="https://n-herling-mk1.github.io/NTH_mk2/assets/images/NTH_resized_ico.png" />
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI UI Splash Page" />
+  <meta name="twitter:description" content="Explore an interactive AI-powered UI carousel." />
+  <meta name="twitter:image" content="https://n-herling-mk1.github.io/NTH_mk2/assets/images/NTH_resized_ico.png" />
 
-    <!-- Your CSS -->
-    <link rel="stylesheet" href="css/pages/splash.css" />
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/pages/splash.css" />
 
-    <!-- Favicon with fallback paths -->
-    <link rel="icon" href="assets/images/page_ico_w_bg.png" type="image/png" />
-    <link rel="icon" href="/NTH_mk2/assets/images/page_ico_w_bg.png" type="image/png" />
+  <!-- Favicon -->
+  <link rel="icon" href="assets/images/page_ico_w_bg.png" type="image/png" />
+  <link rel="icon" href="/NTH_mk2/assets/images/page_ico_w_bg.png" type="image/png" />
 </head>
 
 <body>
-    <canvas id="sphereCanvas"></canvas>
-    <div class="button-container">
-        <button id="enterBtn">Enter Main Page</button>
-    </div>
+  <main class="container">
+    <canvas id="sphereCanvas" aria-label="Interactive sphere visualization"></canvas>
 
-    <script src="js/pages/splash.js"></script>
+    <div class="button-container">
+      <button id="enterBtn" type="button" aria-describedby="enterDesc">Enter Main Page</button>
+      <p id="enterDesc" class="visually-hidden">Click to enter the main page of the AI UI project</p>
+    </div>
+  </main>
+
+  <script src="js/pages/splash.js" defer></script>
 </body>
 
 </html>

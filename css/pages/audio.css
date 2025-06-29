@@ -1,0 +1,184 @@
+/* Global body styling */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #111;
+  color: #eee;
+  text-align: center;
+  padding: 20px;
+  margin: 0;
+}
+
+/* Drag & Drop Zone */
+#dropZone {
+  border: 2px dashed #666;
+  border-radius: 8px;
+  background-color: #222;
+  color: #aaa;
+  padding: 30px;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 600px;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+#dropZone.dragover {
+  background-color: #333;
+  border-color: #0f0;
+  color: #0f0;
+}
+
+/* Now Playing text */
+#nowPlaying {
+  margin: 20px 0;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+/* Controls container */
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+/* Controls buttons */
+.controls button {
+  font-size: 1.5em;
+  padding: 10px 15px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.controls button:hover,
+.controls button:focus {
+  background-color: #555;
+  outline: none;
+}
+
+/* Progress slider */
+#progressSlider {
+  width: 300px;
+  cursor: pointer;
+}
+
+/* Canvas styling */
+canvas {
+  display: block;
+  margin: 20px auto;
+  background-color: #222;
+  border-radius: 5px;
+  box-shadow: 0 0 10px #111;
+}
+
+/* Playlist container */
+#playlist {
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto 30px auto;
+  padding: 0;
+  list-style: none;
+  max-height: 200px;
+  overflow-y: auto;
+  text-align: left;
+  border-radius: 6px;
+  background-color: #1a1a1a;
+  box-shadow: inset 0 0 5px #000;
+}
+
+/* Playlist items */
+#playlist li {
+  padding: 10px;
+  border-bottom: 1px solid #333;
+  color: #ccc;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#playlist li:hover:not(.active) {
+  background-color: #2a2a2a;
+  color: #eee;
+}
+
+#playlist li.active {
+  background-color: #444;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* Dashboard styling */
+#dashboard {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 200px;
+  background-color: #1a1a1a;
+  color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px #000;
+  font-size: 0.9em;
+  z-index: 999;
+  user-select: none;
+}
+
+#dashboard h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.1em;
+  border-bottom: 1px solid #333;
+  padding-bottom: 5px;
+}
+
+/* Visualizer mode radio buttons container */
+#visualizerModes {
+  margin: 10px 0;
+  font-family: monospace;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  color: #ccc;
+}
+
+#visualizerModes input {
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+/* Spectrum container for horizontal scroll */
+#spectrumContainer {
+  width: 80%;
+  max-height: 300px;   /* smaller height if 800px is too tall */
+  overflow-x: auto;
+  overflow-y: auto;    /* allow vertical scroll if needed */
+  border: 1px solid #444;
+  margin-bottom: 1em;
+  background-color: #000;
+  border-radius: 5px;
+  box-shadow: inset 0 0 8px #111;
+  box-sizing: border-box;
+}
+
+#spectrum {
+  height: 400px;      /* increase height if you want taller widget */
+  width: 100%;        /* fill container width */
+  max-width: 400px;  /* max width to allow horizontal scroll */
+  display: block;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+
+/* Spectrum canvas larger than container for scroll */
+#spectrum {
+  height: 250px;      /* increase height if you want taller widget */
+  width: 100%;        /* fill container width */
+  max-width: 1200px;  /* max width to allow horizontal scroll */
+  display: block;
+  background-color: transparent;
+  box-sizing: border-box;
+}
