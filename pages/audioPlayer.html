@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Custom Audio Player</title>
+  <link rel="stylesheet" href="../css/pages/audio.css" />
+  <link rel="stylesheet" href="../css/pages/audio_player.css" />
+  <link rel="stylesheet" href="../css/pages/alertDisplay.css" />
+</head>
+
+<body>
+
+  <main>
+
+    <h1>🎵 Custom Audio Player</h1>
+
+    <!-- Drop Zone -->
+    <section id="dropZone">
+      <p>Drag & drop .mp3 or .wav files here</p>
+    </section>
+
+    <!-- ✅ Alert / Animation / Update Display Area -->
+    <div id="alertDisplay">
+      <div class="bolt">
+  <svg viewBox="0 0 24 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <polyline points="8,0 16,24 10,24 18,48" />
+  </svg>
+</div>
+
+    </div>
+
+    <!--Button Row-->
+    <div id="buttonContainer">
+      <button class="powerBtn" id="powerBtn"><span>Power</span></button>
+      <button class="playerBtn" id="skin1"><span>Skin 1</span></button>
+      <button class="playerBtn" id="skin2"><span>Skin 2</span></button>
+      <button class="playerBtn" id="skin3"><span>Skin 3</span></button>
+    </div>
+
+   <!-- ✅ Pulse Visualizer -->
+    <div id="pulseBarContainer">
+      <div id="pulseBar"></div>
+    </div>
+
+    <!-- Now Playing Display -->
+    <div id="nowPlaying">Now Playing: <span id="trackTitle">None</span></div>
+
+    <!-- Custom Controls -->
+    <div class="controls">
+      <button id="rewindBtn">⏪</button>
+      <button id="playPauseBtn">▶️</button>
+      <button id="forwardBtn">⏩</button>
+      <input type="range" id="progressSlider" value="0" min="0" step="1">
+    </div>
+
+    <!-- Hidden Audio Element -->
+    <audio id="audioPlayer"></audio>
+
+    <!-- Visualizer Options -->
+    <section id="visualizerSection">
+      <h3>Visualizer Mode</h3>
+      <div id="visualizerModes">
+        <label><input type="radio" name="vizMode" value="bars" checked> Bars</label>
+        <label><input type="radio" name="vizMode" value="wave"> Wave</label>
+        <label><input type="radio" name="vizMode" value="ring"> Ring</label>
+        <label><input type="radio" name="vizMode" value="sonic_tarp"> Sonic Tarp</label>
+        <label><input type="radio" name="vizMode" value="orbit"> Orbit</label>
+        <label><input type="radio" name="vizMode" value="ripples"> Ripples</label>
+      </div>
+
+      <!-- Sonic Tarp Controls -->
+    <div id="sonicTarpControls" style="display: none; position: fixed; bottom: 20px; right: 20px; padding: 10px; background: #111; border: 1px solid #444; border-radius: 8px; z-index: 1000;">
+      <label for="bounceSlider" style="color: white;">Bounce Intensity</label>
+      <input type="range" id="bounceSlider" min="10" max="120" value="40">
+    </div>
+    </section>
+
+    <!-- Spectrum Analyzer Canvas -->
+    <canvas id="canvas_html" width="400" height="300"></canvas>
+
+    <!-- Playlist Section -->
+    <section>
+      <h2>Playlist</h2>
+      <ul id="playlist"></ul>
+    </section>
+
+  </main>
+
+<!-- Scripts -->
+<script type="module" src="../js/pages/audio_controller.js"></script>
+<script type="module" src="../js/modules/utils/audio_player_ui.js"></script>
+<script type="module">
+  import { powerOnAnimation } from '../js/modules/utils/ui_animations.js';
+
+  // Trigger the animation on load or button click
+  window.addEventListener('load', () => {
+    powerOnAnimation();
+  });
+  </script>
+</body>
+</html>
